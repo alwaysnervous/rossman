@@ -1,0 +1,408 @@
+{
+  "linear_regression": {
+    "target": "Sales",
+    "model": {
+      "type": "LinearRegression",
+      "params": {
+        "n_jobs": -1
+      }
+    },
+    "data": {
+      "raw_files": [
+        "train.csv",
+        "store.csv",
+        "store_states.csv"
+      ],
+      "external_files": [
+        "weather_daytime.csv",
+        "googletrend_self.csv",
+        "unemployment_germany.csv"
+      ]
+    },
+    "split": {
+      "train_before": "2015-06-01",
+      "valid_from": "2015-06-01"
+    },
+    "drop_columns": [
+      "Date",
+      "Customers",
+      "State"
+    ],
+    "date_features": [
+      "year",
+      "month",
+      "day",
+      "dayofweek",
+      "WeekOfYear",
+      "IsMonthEnd",
+      "IsFriday"
+    ],
+    "one_hot_columns": [
+      "StateHoliday",
+      "StoreType",
+      "Assortment",
+      "PromoInterval"
+    ],
+    "external_features": {
+      "weather": true,
+      "google_trends": true,
+      "unemployment": true
+    },
+    "holiday_features": [
+      "PublicHoliday",
+      "BeforeHoliday",
+      "AfterHoliday"
+    ],
+    "lag_features": [
+      "Sales_Lag1",
+      "Sales_Lag7",
+      "Sales_Rolling7"
+    ],
+    "fillna": 0,
+    "metrics": {
+      "rmspe": 0.20813858764563706,
+      "mae": 1016.2951067833541,
+      "r2": 0.7654207272704117
+    }
+  },
+  "xgboost_lags_shap": {
+    "target": "Sales",
+    "model": {
+      "type": "xgboost.Booster",
+      "params": {
+        "max_depth": 5,
+        "learning_rate": 0.05,
+        "objective": "reg:squarederror",
+        "eval_metric": "rmse",
+        "seed": 42
+      },
+      "num_boost_round": 3000,
+      "early_stopping_rounds": 50,
+      "best_iteration": 537
+    },
+    "data": {
+      "raw_files": [
+        "train.csv",
+        "store.csv",
+        "store_states.csv"
+      ],
+      "external_files": [
+        "weather_daytime.csv"
+      ]
+    },
+    "split": {
+      "train_before": "2015-06-01",
+      "valid_from": "2015-06-01"
+    },
+    "drop_columns": [
+      "Date",
+      "Customers",
+      "State"
+    ],
+    "date_features": [
+      "year",
+      "month",
+      "day",
+      "dayofweek",
+      "WeekOfYear"
+    ],
+    "one_hot_columns": [
+      "StateHoliday",
+      "StoreType",
+      "Assortment",
+      "PromoInterval"
+    ],
+    "external_features": {
+      "weather": true,
+      "google_trends": false,
+      "unemployment": false
+    },
+    "holiday_features": [
+      "PublicHoliday"
+    ],
+    "lag_features": [
+      "Sales_Lag1",
+      "Sales_Lag7",
+      "Sales_Rolling7"
+    ],
+    "fillna": 0,
+    "metrics": {
+      "rmspe": 0.15369687234806406,
+      "mae": 735.4156904592704,
+      "r2": 0.884863619114456
+    }
+  },
+  "xgboost_all_features": {
+    "target": "Sales",
+    "model": {
+      "type": "xgboost.Booster",
+      "params": {
+        "max_depth": 5,
+        "learning_rate": 0.05,
+        "objective": "reg:squarederror",
+        "eval_metric": "rmse",
+        "seed": 42
+      },
+      "num_boost_round": 3000,
+      "early_stopping_rounds": 50,
+      "best_iteration": 557
+    },
+    "data": {
+      "raw_files": [
+        "train.csv",
+        "store.csv",
+        "store_states.csv"
+      ],
+      "external_files": [
+        "weather_daytime.csv",
+        "googletrend_self.csv",
+        "unemployment_germany.csv"
+      ]
+    },
+    "split": {
+      "train_before": "2015-06-01",
+      "valid_from": "2015-06-01"
+    },
+    "drop_columns": [
+      "Date",
+      "Customers",
+      "State"
+    ],
+    "date_features": [
+      "year",
+      "month",
+      "day",
+      "dayofweek",
+      "WeekOfYear",
+      "IsMonthEnd",
+      "IsFriday"
+    ],
+    "one_hot_columns": [
+      "StateHoliday",
+      "StoreType",
+      "Assortment",
+      "PromoInterval"
+    ],
+    "external_features": {
+      "weather": true,
+      "google_trends": true,
+      "unemployment": true
+    },
+    "holiday_features": [
+      "PublicHoliday",
+      "BeforeHoliday",
+      "AfterHoliday"
+    ],
+    "lag_features": [
+      "Sales_Lag1",
+      "Sales_Lag7",
+      "Sales_Rolling7"
+    ],
+    "fillna": 0,
+    "metrics": {
+      "rmspe": 0.15173962740232144
+    }
+  },
+  "xgboost_full_features": {
+    "target": "Sales",
+    "model": {
+      "type": "xgboost.Booster",
+      "params": {
+        "max_depth": 5,
+        "learning_rate": 0.05,
+        "objective": "reg:squarederror",
+        "eval_metric": "rmse",
+        "seed": 42
+      },
+      "num_boost_round": 3000,
+      "early_stopping_rounds": 50,
+      "best_iteration": 2999
+    },
+    "data": {
+      "raw_files": [
+        "train.csv",
+        "store.csv",
+        "store_states.csv"
+      ],
+      "external_files": [
+        "weather_daytime.csv",
+        "googletrend_self.csv",
+        "unemployment_germany.csv"
+      ]
+    },
+    "split": {
+      "train_before": "2015-06-01",
+      "valid_from": "2015-06-01"
+    },
+    "drop_columns": [
+      "Date",
+      "Customers",
+      "State"
+    ],
+    "date_features": [
+      "year",
+      "month",
+      "day",
+      "dayofweek",
+      "WeekOfYear",
+      "IsMonthEnd",
+      "IsFriday"
+    ],
+    "one_hot_columns": [
+      "StateHoliday",
+      "StoreType",
+      "Assortment",
+      "PromoInterval"
+    ],
+    "external_features": {
+      "weather": true,
+      "google_trends": true,
+      "unemployment": true
+    },
+    "holiday_features": [
+      "PublicHoliday",
+      "BeforeHoliday",
+      "AfterHoliday"
+    ],
+    "lag_features": [],
+    "fillna": 0,
+    "metrics": {
+      "rmspe": 0.1688601563537362,
+      "mae": 771.044989372837
+    }
+  },
+  "random_forest": {
+    "target": "Sales",
+    "model": {
+      "type": "RandomForestRegressor",
+      "params": {
+        "n_estimators": 100,
+        "max_depth": 15,
+        "random_state": 42,
+        "n_jobs": -1
+      }
+    },
+    "data": {
+      "raw_files": [
+        "train.csv",
+        "store.csv",
+        "store_states.csv"
+      ],
+      "external_files": [
+        "weather_daytime.csv",
+        "googletrend_self.csv",
+        "unemployment_germany.csv"
+      ]
+    },
+    "split": {
+      "train_before": "2015-06-01",
+      "valid_from": "2015-06-01"
+    },
+    "drop_columns": [
+      "Date",
+      "Customers",
+      "State"
+    ],
+    "date_features": [
+      "year",
+      "month",
+      "day",
+      "dayofweek",
+      "WeekOfYear",
+      "IsMonthEnd",
+      "IsFriday"
+    ],
+    "one_hot_columns": [
+      "StateHoliday",
+      "StoreType",
+      "Assortment",
+      "PromoInterval"
+    ],
+    "external_features": {
+      "weather": true,
+      "google_trends": true,
+      "unemployment": true
+    },
+    "holiday_features": [
+      "PublicHoliday",
+      "BeforeHoliday",
+      "AfterHoliday"
+    ],
+    "lag_features": [
+      "Sales_Lag1",
+      "Sales_Lag7",
+      "Sales_Rolling7"
+    ],
+    "fillna": 0,
+    "metrics": {
+      "rmspe": 0.14454874480093124,
+      "mae": 687.1635650769288,
+      "r2": 0.8972427844008289
+    }
+  },
+  "baseline": {
+    "target": "Sales",
+    "model": {
+      "type": "xgboost.Booster",
+      "params": {
+        "max_depth": 5,
+        "learning_rate": 0.05,
+        "objective": "reg:squarederror",
+        "eval_metric": "rmse",
+        "seed": 42
+      },
+      "num_boost_round": 3000,
+      "early_stopping_rounds": 50,
+      "best_iteration": 2983
+    },
+    "data": {
+      "raw_files": [
+        "train.csv",
+        "store.csv",
+        "store_states.csv"
+      ],
+      "external_files": [
+        "weather_daytime.csv"
+      ]
+    },
+    "split": {
+      "train_before": "2015-06-01",
+      "valid_from": "2015-06-01"
+    },
+    "drop_columns": [
+      "Date",
+      "Customers",
+      "State"
+    ],
+    "date_features": [
+      "year",
+      "month",
+      "day",
+      "dayofweek",
+      "WeekOfYear",
+      "IsMonthEnd",
+      "IsFriday"
+    ],
+    "one_hot_columns": [
+      "StateHoliday",
+      "StoreType",
+      "Assortment",
+      "PromoInterval"
+    ],
+    "external_features": {
+      "weather": true,
+      "google_trends": false,
+      "unemployment": false
+    },
+    "holiday_features": [
+      "PublicHoliday"
+    ],
+    "lag_features": [],
+    "fillna": 0,
+    "metrics": {
+      "rmspe": 0.17195262142740025,
+      "mae": 773.5348715155966,
+      "r2": 0.8812070876757653
+    }
+  }
+}
