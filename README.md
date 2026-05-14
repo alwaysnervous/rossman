@@ -41,6 +41,21 @@ python src\models\xgboost_all_features.py
 python src\models\xgboost_full_features.py
 ```
 
+Перебор всех валидных комбинаций групп признаков для Linear Regression,
+Random Forest и XGBoost:
+
+```powershell
+python src\models\feature_variant_search.py
+```
+
+Результаты перебора сохраняются в `outputs/reports/feature_variant_metrics.csv`
+и `outputs/reports/feature_variant_metrics.json`. Для проверки списка
+экспериментов без обучения:
+
+```powershell
+python src\models\feature_variant_search.py --dry-run
+```
+
 Графики сохраняются в `outputs/figures/`, отчёты в `outputs/reports/`.
 
 После обучения модели сохраняются в `outputs/models/`:

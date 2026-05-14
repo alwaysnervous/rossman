@@ -1,6 +1,7 @@
 {
   "linear_regression": {
     "target": "Sales",
+    "feature_variant": "weather__unemployment__holidays__lags",
     "model": {
       "type": "LinearRegression",
       "params": {
@@ -15,7 +16,6 @@
       ],
       "external_files": [
         "weather_daytime.csv",
-        "googletrend_self.csv",
         "unemployment_germany.csv"
       ]
     },
@@ -45,8 +45,9 @@
     ],
     "external_features": {
       "weather": true,
-      "google_trends": true,
-      "unemployment": true
+      "google_trends": false,
+      "unemployment": true,
+      "promo_weather_interactions": false
     },
     "holiday_features": [
       "PublicHoliday",
@@ -60,9 +61,9 @@
     ],
     "fillna": 0,
     "metrics": {
-      "rmspe": 0.20813858764563706,
-      "mae": 1016.2951067833541,
-      "r2": 0.7654207272704117
+      "rmspe": 0.20259785266356087,
+      "mae": 1012.2507028816804,
+      "r2": 0.7656799662000524
     }
   },
   "xgboost_lags_shap": {
@@ -145,7 +146,7 @@
       },
       "num_boost_round": 3000,
       "early_stopping_rounds": 50,
-      "best_iteration": 557
+      "best_iteration": 359
     },
     "data": {
       "raw_files": [
@@ -200,7 +201,7 @@
     ],
     "fillna": 0,
     "metrics": {
-      "rmspe": 0.15173962740232144
+      "rmspe": 0.15457966936765088
     }
   },
   "xgboost_full_features": {
@@ -267,12 +268,13 @@
     "lag_features": [],
     "fillna": 0,
     "metrics": {
-      "rmspe": 0.1688601563537362,
-      "mae": 771.044989372837
+      "rmspe": 0.1737910301797343,
+      "mae": 774.7067830293262
     }
   },
   "random_forest": {
     "target": "Sales",
+    "feature_variant": "weather__holidays__lags",
     "model": {
       "type": "RandomForestRegressor",
       "params": {
@@ -289,9 +291,7 @@
         "store_states.csv"
       ],
       "external_files": [
-        "weather_daytime.csv",
-        "googletrend_self.csv",
-        "unemployment_germany.csv"
+        "weather_daytime.csv"
       ]
     },
     "split": {
@@ -320,8 +320,9 @@
     ],
     "external_features": {
       "weather": true,
-      "google_trends": true,
-      "unemployment": true
+      "google_trends": false,
+      "unemployment": false,
+      "promo_weather_interactions": false
     },
     "holiday_features": [
       "PublicHoliday",
@@ -335,9 +336,9 @@
     ],
     "fillna": 0,
     "metrics": {
-      "rmspe": 0.14454874480093124,
-      "mae": 687.1635650769288,
-      "r2": 0.8972427844008289
+      "rmspe": 0.14289553753179712,
+      "mae": 682.8379399490933,
+      "r2": 0.8985608821587667
     }
   },
   "baseline": {
@@ -403,6 +404,77 @@
       "rmspe": 0.17195262142740025,
       "mae": 773.5348715155966,
       "r2": 0.8812070876757653
+    }
+  },
+  "xgboost_shap_holidays_lags": {
+    "target": "Sales",
+    "feature_variant": "holidays__lags",
+    "model": {
+      "type": "xgboost.Booster",
+      "params": {
+        "max_depth": 5,
+        "learning_rate": 0.05,
+        "objective": "reg:squarederror",
+        "eval_metric": "rmse",
+        "seed": 42
+      },
+      "num_boost_round": 3000,
+      "early_stopping_rounds": 50,
+      "best_iteration": 891
+    },
+    "data": {
+      "raw_files": [
+        "train.csv",
+        "store.csv",
+        "store_states.csv"
+      ],
+      "external_files": []
+    },
+    "split": {
+      "train_before": "2015-06-01",
+      "valid_from": "2015-06-01"
+    },
+    "drop_columns": [
+      "Date",
+      "Customers",
+      "State"
+    ],
+    "date_features": [
+      "year",
+      "month",
+      "day",
+      "dayofweek",
+      "WeekOfYear",
+      "IsMonthEnd",
+      "IsFriday"
+    ],
+    "one_hot_columns": [
+      "StateHoliday",
+      "StoreType",
+      "Assortment",
+      "PromoInterval"
+    ],
+    "external_features": {
+      "weather": false,
+      "google_trends": false,
+      "unemployment": false,
+      "promo_weather_interactions": false
+    },
+    "holiday_features": [
+      "PublicHoliday",
+      "BeforeHoliday",
+      "AfterHoliday"
+    ],
+    "lag_features": [
+      "Sales_Lag1",
+      "Sales_Lag7",
+      "Sales_Rolling7"
+    ],
+    "fillna": 0,
+    "metrics": {
+      "rmspe": 0.14386279064280288,
+      "mae": 697.5992858225976,
+      "r2": 0.8988229978172899
     }
   }
 }
